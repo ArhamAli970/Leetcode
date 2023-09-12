@@ -40,7 +40,7 @@ class Solution {
 
     for(int i=0;i<n;i++){ 
      int c=call(i,arr,d);
-     System.out.print(c+" "+i);
+    //  System.out.print(c+" "+i);
      max=Math.max(c,max);
     }
 
