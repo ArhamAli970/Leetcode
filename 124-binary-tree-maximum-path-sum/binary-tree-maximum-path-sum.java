@@ -23,8 +23,7 @@ public static int maxSum(TreeNode root){
     int right=maxSum(root.right);
 
     int maxs=Math.max(left,right)+root.val;
-    max=Math.max(max,maxs);
-    max=Math.max(left+right+root.val,max);
+    max=Math.max(left+right+root.val,Math.max(max,maxs));
 
     if(maxs<0){return 0;}
 
