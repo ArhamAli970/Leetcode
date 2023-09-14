@@ -1,6 +1,6 @@
 class Solution {
 
-  static List<String> l;
+  static LinkedList<String> l;
 
     public static boolean dfs(String st,int e,  HashMap<String,ArrayList<ArrayList<String>>> tp){
         //base case
@@ -14,7 +14,7 @@ class Solution {
           if(t.get(i).get(1).equals("-1")){
             tp.get(st).get(i).set(1, "0");
             if(dfs(t.get(i).get(0), e-1, tp)){ 
-              l.add(0, t.get(i).get(0));
+              l.addFirst(t.get(i).get(0));
               return true;
             }
           tp.get(st).get(i).set(1, "-1");  
@@ -65,6 +65,12 @@ ArrayList <String> a= new ArrayList<>();
 
   dfs(st,n,tp);
   l.add(0,st);
-  return l;
+
+List<String> ls= new ArrayList<>();
+while(l.size()!=0){ 
+  ls.add(l.removeFirst());
+}
+
+  return ls;
     }
 }
