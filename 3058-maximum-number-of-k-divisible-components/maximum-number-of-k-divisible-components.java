@@ -9,7 +9,7 @@ class Solution {
         }
 
         if(sum%k==0){ 
-            System.out.print("df");
+            // System.out.print("df");
           cnt++;
           return 0;
         }
