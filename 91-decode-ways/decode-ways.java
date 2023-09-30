@@ -25,11 +25,11 @@ class Solution {
     }
     public int numDecodings(String s) {
         int n=s.length();
-        for(int i=1;i<n;i++){ 
-            if((s.charAt(i)=='0' && s.charAt(i-1)=='0') || (s.charAt(i)=='0' && s.charAt(i-1)-'0'>2)){ 
-                   return 0;
-            }
-        }
+        // for(int i=1;i<n;i++){ 
+        //     if((s.charAt(i)=='0' && s.charAt(i-1)=='0') || (s.charAt(i)=='0' && s.charAt(i-1)-'0'>2)){ 
+        //            return 0;
+        //     }
+        // }
 
         if(s.charAt(0)=='0'){return 0;}
 
