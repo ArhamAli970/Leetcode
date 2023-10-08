@@ -28,9 +28,9 @@ class Solution {
 
     public int maxDotProduct(int[] nums1, int[] nums2) {
         int n=nums1.length,m=nums2.length;
-        int max=Math.max(n,m);
+        // int max=Math.max(n,m);
         
-        dp= new int[max+1][max+1];
+        dp= new int[n+1][m+1];
 
         for(int i[]:dp){ 
             Arrays.fill(i,Integer.MIN_VALUE);
