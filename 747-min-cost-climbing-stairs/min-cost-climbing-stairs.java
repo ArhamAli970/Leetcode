@@ -2,12 +2,14 @@ class Solution {
 
 public static int min(int [] cost,int idx,int []dp){  
     // base case
-    if(idx==cost.length-1 || idx==cost.length-2){ 
-        return cost[idx];
+    if(idx>=cost.length){ 
+        return 0;
     }
     if(dp[idx]!=Integer.MAX_VALUE){ 
         return dp[idx];
     }
+
+
 
     int oneStep=min(cost,idx+1,dp);
     int twoStep=min(cost,idx+2,dp);
@@ -17,18 +19,15 @@ return dp[idx];
      
     public int minCostClimbingStairs(int[] cost) { 
         int dp[]= new int[cost.length];
-        for(int i=0;i<dp.length;i++){ 
-            dp[i]=Integer.MAX_VALUE;
-        }
-       int val=min(cost,0,dp); 
+        
+        Arrays.fill(dp,Integer.MAX_VALUE);
 
-     int []   dp1= new int[cost.length];
-        for(int i=0;i<dp1.length;i++){ 
-            dp1[i]=Integer.MAX_VALUE;
-        }
-       int val2= min(cost,1,dp1); 
+       min(cost,0,dp); 
 
-return Math.min(val,val2);
+    //    System.out.print(dp[0]+" "+dp[1]+" "+dp[2]);
+
+       return Math.min(dp[0],dp[1]);
+
         
     }
 }
