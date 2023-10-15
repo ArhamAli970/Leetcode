@@ -21,8 +21,8 @@ class Solution {
 
     public int numWays(int steps, int arrLen) {
 
-            if(arrLen>=500){ 
-                arrLen=500;
+            if(arrLen>=251){ 
+                arrLen=251;
             }
 
              mod=1000000007;
