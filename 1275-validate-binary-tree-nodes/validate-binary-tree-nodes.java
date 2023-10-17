@@ -14,7 +14,6 @@ class Solution {
             int c=q.remove();
             vis[c]=true;
             h.add(c);
-            //  System.out.print(c);
             if(  (leftChild[c]!=-1 && rightChild[c]!=-1) && leftChild[c]==rightChild[c]){ 
                 return false;
             }
@@ -24,12 +23,12 @@ class Solution {
              if(leftChild[c]!=-1){ 
                  if(h.contains(leftChild[c])){return false;}
                  res[leftChild[c]]=c;
-                 if(!vis[leftChild[c]]){q.add(leftChild[c]);}
+                 if(!vis[leftChild[c]]){q.add(leftChild[c]);;} 
                  cnt--;
                  
              }
              if(rightChild[c]!=-1){ 
-                   if(h.contains(rightChild[c])){return false;}
+                if(h.contains(rightChild[c])){return false;}
                  res[rightChild[c]]=c;
                  if(!vis[rightChild[c]]){q.add(rightChild[c]);}
                  cnt--;
@@ -61,7 +60,7 @@ class Solution {
             }
         }
 
-        System.out.print(cnt);
+        // System.out.print(cnt);
         if(cnt !=1){return false;}
         return true;
 
