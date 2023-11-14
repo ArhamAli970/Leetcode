@@ -20,7 +20,7 @@ class Solution {
        }
 
 int cnt=0;
-System.out.print(lastOcc+" "+firstOcc);
+// System.out.print(lastOcc+" "+firstOcc);
 
        for(int i=0;i<26;i++){ 
             
