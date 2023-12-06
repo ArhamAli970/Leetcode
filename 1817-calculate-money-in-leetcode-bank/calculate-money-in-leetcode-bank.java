@@ -1,26 +1,24 @@
 class Solution {
     public int totalMoney(int n) {
 
-       int lastMon=1;
-       int money=0;
+    int rem=n%7;
+    int cnt=(n/7);
+    int tot= (cnt*(2*28+(cnt-1)*7))/2;
 
-       for(int i=1;i<=n;i++){ 
+    ++cnt;
+    while(rem>0){ 
+       tot+=cnt;
+       cnt++;
+       rem--;
+    }
 
-          money+=lastMon;
-           
-          i++;
-          int cnt=6,m=lastMon+1;
-          while(i<=n && cnt>0){ 
-             money+=m;
-             i++;cnt--;m++;
-          }
+    return tot;
 
-          if(i>n){break;}
-          --i;
-          lastMon++;
 
-       }
 
-return money;
+
+
+
+     
     }
 }
