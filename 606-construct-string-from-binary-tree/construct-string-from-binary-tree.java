@@ -51,27 +51,9 @@ if(i!=0){
   }
     public String tree2str(TreeNode root) {
         sb=new StringBuilder();
-
+        sb.append(String.valueOf(root.val));
         call(root,0);
 
-sb.insert(0,String.valueOf(root.val));
-// System.out.print(sb);
-// int j=0,n=sb.length();
-
-// char ans[]=sb.toString().toCharArray();
-
-// for(int i=0;i<n-2;i++){ 
-
-// if((ans[i]=='(' && ans[i+1]==')' && ans[i+2]==')') || (ans[i]=='(' && ans[i+1]==')' && i+2==n)){ 
-//   ans[i]='X';ans[i+1]='X';
-// }
-
-// }
-
-// sb=new StringBuilder();
-// for(int i=0;i<n;i++){ 
-//   if(ans[i]!='X'){sb.append(ans[i]);}
-// }
 
 return sb.toString();
 
