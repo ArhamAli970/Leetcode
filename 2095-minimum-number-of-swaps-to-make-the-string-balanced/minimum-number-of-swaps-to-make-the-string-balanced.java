@@ -8,16 +8,16 @@ class Solution {
             if(s.charAt(i)=='['){st.push(s.charAt(i));}
 
             else{
-            if(!st.isEmpty() && st.peek()!=']'){ 
-                st.pop();
-            }else{ 
-                st.push(']');
-            }
+                if(!st.isEmpty() && st.peek()!=']'){ 
+                    st.pop();
+                }else{ 
+                    st.push(']');
+                }
             }
 i++;
         }
 int cnt=st.size()/2;
-
+System.gc();
 return cnt%2==0?cnt/2:(cnt/2)+1;
 
 
