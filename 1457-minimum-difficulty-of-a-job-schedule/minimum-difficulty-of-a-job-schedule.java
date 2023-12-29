@@ -25,7 +25,7 @@ public static int call(int jobDifficulty[],int d,int i,int max){
 
     public int minDifficulty(int[] jobDifficulty, int d) {
         int n=jobDifficulty.length;
-        int max=0;
+        int max=0;if(n<d){return -1;}
         for(int i=0;i<n;i++){ 
             max=Math.max(max,jobDifficulty[i]);
         }
@@ -41,7 +41,6 @@ public static int call(int jobDifficulty[],int d,int i,int max){
         }
     
     int val= call(jobDifficulty,d,0,0);
-
     return val>=Integer.MAX_VALUE/2?-1:val;
 
 
