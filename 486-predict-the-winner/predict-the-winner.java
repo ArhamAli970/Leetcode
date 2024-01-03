@@ -1,7 +1,7 @@
 class Solution {
 
 
-static int dp[][][][];
+// static int dp[][][][];
 
 
 public static int call(int nums[],int i,int j,int sum,int turn){ 
