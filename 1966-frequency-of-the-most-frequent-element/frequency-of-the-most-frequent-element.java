@@ -1,41 +1,27 @@
 class Solution {
     public int maxFrequency(int[] nums, int k) {
         
+        int i=0,j=0,n=nums.length,max=0;
+        System.out.print(n);
+        long sum=0;
         Arrays.sort(nums);
-        int n=nums.length;
-        int preSum[]=new int[n];
 
-         
-         preSum[0]=0;
-         for(int i=1;i<n;i++){ 
-            preSum[i]=nums[i-1]+preSum[i-1];  
-        }
+        while(j<n){ 
+         if(j-1>=0){sum+=(long) (j-i)*(nums[j]-nums[j-1]);}
+                
 
-        int maxLen=1;
-
-        for(int i=0;i<n;i++){ 
-            
-            int st=0,end=i-1;
-
-            while(st<=end){ 
-                   int mid=(st+end)/2;
-                   int dist=i-mid;
-                   if(((dist)*nums[i]) - (preSum[i]-preSum[mid])<=k){ 
-                       maxLen=Math.max(i-mid+1,maxLen);
-                       end=mid-1;
-                   }else{ 
-                       st=mid+1;
-                   }
- 
+            while(sum>k){ 
+              
+                sum-=(nums[j]-nums[i]);
+                i++;
             }
 
-
+            
+            max=Math.max(j-i,max);
+            j++;
         }
 
-
-
-return maxLen;
-
+        return max+1;
 
     }
 }
