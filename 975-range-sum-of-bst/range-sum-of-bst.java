@@ -19,14 +19,17 @@ class Solution {
     public static int sum(TreeNode root, int low, int high){ 
     
         if(root==null){return 0;}
-        
-//         int sum1=sum(root.left,low,  high);
 
-//         int sum2=sum(root.right,low,  high);
+int sum1=0;
     
-        int val1=sum(root.left,low,  high)+sum(root.right,low,  high);
+    if(root.val>=low){
+        sum1+=sum(root.left,low,  high);
+    }
+    if(root.val<=high){
+        sum1+=sum(root.right,low,  high);
+    }
         
-        return root.val>=low  && root.val<=high ? root.val+val1 :0 + val1;
+        return root.val>=low  && root.val<=high ? root.val+sum1 :0 + sum1;
         
     }
     
