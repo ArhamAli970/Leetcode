@@ -1,37 +1,25 @@
 class Solution {
-    static HashSet<String> chk;
-    static int dp[][];
-    public static int call(String s,int i,int j){
-        if(j==s.length() ){return i==j?1:0;}
-
-if(dp[i][j]!=-1){return dp[i][j];}
-
-int take=-1,notTake=-1;
-
-        if(chk.contains(s.substring(i,j+1))){
-             take=call(s,j+1,j+1);
+    public boolean wordBreak(String s, List<String> B) {
+            int m=s.length();
+            int n=B.size(),max=0;
+         HashSet<String> h= new HashSet<>();
+         for(String i:B){
+             h.add(i);
+             max=Math.max(max,i.length());
+         }
+     
+     boolean dp[]=new boolean[m+1];
+     dp[0]=true;
+     
+     for(int i=0;i<m;i++){
+         String ans="";
+        for(int j=i;j>=Math.max(0,i-20);j--){
+            ans=s.charAt(j)+ans;
+            if(h.contains(ans) && dp[j]){dp[i+1]=true;break;}
         }
-        notTake=call(s,i,j+1);
-
-        dp[i][j]=(take==1 || notTake==1)?1:0;
-        return dp[i][j];
-        
+     
     }
-    public boolean wordBreak(String s, List<String> wordDict) {
-
-        chk= new HashSet<>();
-        int n=s.length();
-        dp=new int[n][n];
-
-for(int i[]:dp){
-        Arrays.fill(i,-1);
-}
-
-        for(String i:wordDict){
-            chk.add(i);
-        }
-
-        return call(s,0,0)==1;
-        
+    
+         return dp[m];
     }
 }
