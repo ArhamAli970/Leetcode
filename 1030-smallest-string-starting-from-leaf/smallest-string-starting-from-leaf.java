@@ -22,7 +22,7 @@ public static void call(TreeNode root,String s){
    if(root.left==null && root.right==null){
         s=(char)(root.val+'a')+s;
         int val=s.compareTo(ans);
-        if(val<0 || (val==0 && s.length()<ans.length())){ans=s;}
+        if(val<0){ans=s;}
         return;
    }
 
