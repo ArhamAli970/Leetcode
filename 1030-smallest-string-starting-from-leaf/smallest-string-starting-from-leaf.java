@@ -20,21 +20,10 @@ public static void call(TreeNode root,String s){
    if(root==null){return;}
 
    if(root.left==null && root.right==null){
-         s=(char)(root.val+'a')+s;
-    int size=Math.min(s.length(),ans.length());
-
-    String lftSub=s.substring(0,size);
-    String rhtSub=ans.substring(0,size);
-
-    int val=lftSub.compareTo(rhtSub);
-
-    if(val<0){
-        ans=s;  
-    }
-    else if(val==0 && s.length()<ans.length()){
-        ans=s;
-    }
-    
+        s=(char)(root.val+'a')+s;
+        int val=s.compareTo(ans);
+        if(val<0 || (val==0 && s.length()<ans.length())){ans=s;}
+        return;
    }
 
    call(root.left,(char)(root.val+'a')+s);
