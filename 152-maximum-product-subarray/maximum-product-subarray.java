@@ -1,29 +1,29 @@
 class Solution {
-    
-    public int maxProduct(int[] arr) {
-    
-    int max=Integer.MIN_VALUE;
-    int prod=1,lstProd=Integer.MIN_VALUE;
-    for(int i=0;i<arr.length;i++){ 
-        if(arr[i]!=0){ 
-            prod*=arr[i];
-            // System.out.print(prod+" ");
-            max=Math.max(prod,Math.max(arr[i],max));
-            if(prod<0 && lstProd!=Integer.MIN_VALUE){ 
-                max=Math.max(prod/lstProd,max);
+    public int maxProduct(int[] nums) {
+        if(nums.length==1){return nums[0];}
+        int j=0,n=nums.length;
+        int ans=nums[0];
+        int prod=1;
+        
+
+        for(int i=0;i<=n;i++){
+            if(i==n  || nums[i]==0){
+                while(j<i && prod<0){
+                    prod/=nums[j++];
+                }
+                if(i!=j){ans=Math.max(prod,ans);}
+                if(i<n){ans=Math.max(ans,0);}
+                j=i+1;
+                prod=j<n?1:0;
             }
-            else if(prod<0 && lstProd==Integer.MIN_VALUE){ 
-                lstProd=prod;
+            else{
+                prod*=nums[i];
+                ans=Math.max(prod,ans);
+                ans=Math.max(ans,nums[i]);
             }
         }
-        else{
-            max=Math.max(arr[i],max); 
-            prod=1;
-            lstProd=Integer.MIN_VALUE;
-        }
-    }
 
-    return max;
-
+return ans;
+        
     }
 }
