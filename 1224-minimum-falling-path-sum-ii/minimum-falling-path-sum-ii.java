@@ -13,12 +13,8 @@ class Solution {
                 }
             }
 
-            for(int j=0;j<m;j++){
-                if(min1==arr[i-1][j]){
-                    arr[i][j]+=min2;
-                }else{
-                    arr[i][j]+=min1;
-                }
+            for(int j=0;j<m;j++){ 
+                    arr[i][j]+=min1==arr[i-1][j]?min2:min1;   
             }
 
         }
