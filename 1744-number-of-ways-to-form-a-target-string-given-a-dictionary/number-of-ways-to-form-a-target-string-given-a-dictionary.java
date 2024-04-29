@@ -8,7 +8,7 @@ class Solution {
 
         if(dp[i][idx]!=-1){return dp[i][idx];}
 
-        long take1=0,take2=0,nTake=0;
+        long take1=0,nTake=0;
         if(mp.get(i).containsKey(target.charAt(idx))){
             take1=call(i+1,idx+1,words,target)*mp.get(i).get(target.charAt(idx));
         }
