@@ -31,7 +31,7 @@ class Solution {
               num2=Integer.valueOf(sb.toString());
            }
 
-           System.out.println(num1+" "+num2);
+        //    System.out.println(num1+" "+num2);
 
            if(num1<num2){return -1;}
            else if(num2<num1){return 1;}
