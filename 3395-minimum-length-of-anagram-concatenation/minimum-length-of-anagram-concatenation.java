@@ -18,10 +18,8 @@ class Solution {
             mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1);
         }
         
-        int min=1;
-        for(Map.Entry<Character,Integer> e:mp.entrySet()){
-            min=e.getValue();break;
-        }
+        int min=mp.get(s.charAt(0));
+     
         
         for(Map.Entry<Character,Integer> e:mp.entrySet()){
             min=gcd(e.getValue(),min);
