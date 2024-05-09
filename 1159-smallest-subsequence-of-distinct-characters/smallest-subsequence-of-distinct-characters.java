@@ -1,32 +1,31 @@
 class Solution {
     public String smallestSubsequence(String s) {
-       int n=s.length();       
-  int cntChar[]= new int[26];
-  boolean chk[]= new boolean[26];
-  Deque<Character> dq= new LinkedList<>();
 
-  for(int i=0;i<n;i++){ 
-    ++cntChar[s.charAt(i)-'a'];
-  }
+        int lst[]=new int[26];
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            lst[s.charAt(i)-'a']=i;
+        }
 
-  for(int i=0;i<n;i++){ 
-    int idx=s.charAt(i)-'a';
-    if(!chk[idx]){ 
-      while(!dq.isEmpty() && dq.getLast()>s.charAt(i) && cntChar[dq.getLast()-'a']>0){ 
-          chk[dq.removeLast()-'a']=false;
-      }
-      dq.add(s.charAt(i));
-      chk[idx]=true;
-    }
-     --cntChar[idx];
-  }
+        Stack<Character> st= new Stack<>();
+        HashSet<Character> h= new HashSet<>();
 
-StringBuilder sb= new StringBuilder();
- while(!dq.isEmpty()){ 
-   sb.append(dq.remove());
- }
+        for(int i=0;i<s.length();i++){
+            if(h.contains(s.charAt(i))){continue;}
+            while(!st.isEmpty() && st.peek()>s.charAt(i) && lst[st.peek()-'a']>i){
+                h.remove(st.pop());
+            }
+            st.push(s.charAt(i));h.add(s.charAt(i));
+            
+        }
+        
+StringBuilder sb = new StringBuilder();
 
- return sb.toString();
- 
+while(!st.isEmpty()){
+    sb.append(st.pop());
+}
+
+return sb.reverse().toString();
+
     }
 }
