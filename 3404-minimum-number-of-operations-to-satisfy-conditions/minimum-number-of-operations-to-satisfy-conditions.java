@@ -1,5 +1,5 @@
 class Solution {
-    static int dp[][][];
+    static int dp[][];
 
 
     public static int call(int i,int prev,HashMap<Integer,HashMap<Integer,Integer>> mp,int m,int n){
@@ -9,20 +9,21 @@ class Solution {
         }
 
 
+if(dp[i][prev]!=-1){return dp[i][prev];}
+
 
         int min=1000000000;
 
         for(int num=0;num<=9;num++){
             if(num==prev){continue;}
-            if(dp[i][prev][num]!=-1){
-                min=Math.min(min,dp[i][prev][num]);
-            }else{
+            else{
                int cnt=!mp.get(i).containsKey(num)?0:mp.get(i).get(num); 
                int get=call(i+1,num,mp,m,n)+(n-cnt);
-               dp[i][prev][num]=get;
                min=Math.min(get,min);
             }
         }
+
+        dp[i][prev]=min;
 
 
         return min;
@@ -33,14 +34,12 @@ class Solution {
 
     public int minimumOperations(int[][] grid) {
         int n=grid.length,m=grid[0].length;
-        dp=new int[m][12][12];
+        dp=new int[m][12];
 
 
         for(int i=0;i<m;i++){
             for(int j=0;j<12;j++){
-                for(int k=0;k<12;k++){
-                    dp[i][j][k]=-1;
-                }
+                dp[i][j]=-1;
             }
         }
 
