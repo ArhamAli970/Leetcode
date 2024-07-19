@@ -34,12 +34,13 @@ return false;
 
         ans=new int[2];
 
-        for(int i=0;i<n;i++){
+        for(int i=n-1;i>=0;i--){
             boolean vis[]=new boolean[n+1];
             vis[edges[i][0]]=true;
             if(dfs(edges[i][1],edges[i][0],vis,edges[i][0])){
                 ans[0]=edges[i][0];
                 ans[1]=edges[i][1];
+                break;
             }
             
 
