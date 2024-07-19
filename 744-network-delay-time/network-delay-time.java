@@ -40,6 +40,7 @@ static class node implements Comparable <node> {
           while(!pq.isEmpty()){ 
              
                node curr=pq.remove();
+               if(!h.contains(curr.dest)){continue;}
                cost=Math.max(curr.cost,cost);
                h.remove(curr.dest);
                  if(h.size()==0){return cost;}
