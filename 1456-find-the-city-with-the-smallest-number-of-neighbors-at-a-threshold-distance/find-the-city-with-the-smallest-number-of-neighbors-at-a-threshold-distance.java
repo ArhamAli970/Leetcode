@@ -1,87 +1,79 @@
 class Solution {
-    public class info{ 
-        int dest;int c;
-        info(int dest,int c){ 
+
+    static class node implements Comparable <node>{
+        int dest,cst;
+        node(int dest,int cst){
             this.dest=dest;
-            this.c=c;
+            this.cst=cst;
+        }
+
+        public int compareTo(node p ){
+            return this.cst-p.cst;
         }
     }
 
-    public class node implements Comparable <node>{ 
-        int idx;int c;
-        node(int idx,int c){ 
-            this.idx=idx;
-            this.c=c;
+    static class nd {
+        int dest,cst;
+        nd(int dest,int cst){
+            this.dest=dest;
+            this.cst=cst;
         }
 
-        @Override
-        public int compareTo(node p){ 
-            return this.c-p.c;
-        }
     }
+
+
 
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {
-        
-        ArrayList<info> a[]= new ArrayList[n];
-        
-        for(int i=0;i<n;i++){ 
-            a[i]=new ArrayList<>();
+
+
+        ArrayList<nd> arr[]=new ArrayList[n];
+
+        for(int i=0;i<n;i++){
+            arr[i]=new ArrayList<>();
         }
 
-        for(int i=0;i<edges.length;i++){ 
-            a[edges[i][0]].add(new info(edges[i][1],edges[i][2]));
-            a[edges[i][1]].add(new info(edges[i][0],edges[i][2]));
+        for(int i[]:edges){
+            arr[i[0]].add(new nd(i[1],i[2]));
+            arr[i[1]].add(new nd(i[0],i[2]));
         }
+int min=Integer.MAX_VALUE,city=-1;
+        for(int i=0;i<n;i++){
+            PriorityQueue<node> pq=new PriorityQueue<>();
+            pq.add(new node(i,0));
+            int cnt=0;
+            boolean vis[]=new boolean[n];
 
-        int ans[]= new int[n];
-        // for every vertices check low no of nodes to approach
-        int min=Integer.MAX_VALUE;
-        for(int i=0;i<n;i++){ 
-       
-          PriorityQueue<node> pq= new PriorityQueue<>();
-          pq.add(new node(i,0));
-          boolean vis[]= new boolean[n];
-          int cnt=0;
-        
-          
-          while(!pq.isEmpty()){ 
-
+            while(!pq.isEmpty()){
                 node curr=pq.remove();
-                // if(curr.c> distanceThreshold){break;}
-                 if(i!=curr.idx && !vis[curr.idx]){cnt++;}
-                vis[curr.idx]=true;
-               
+                if(vis[curr.dest]){continue;}
+                vis[curr.dest]=true;
+                cnt++;
 
-                
-            
+                int cost=curr.cst;int src=curr.dest;
 
-               for(int j=0;j<a[curr.idx].size();j++){ 
-                   info now=a[curr.idx].get(j);
-                   if(!vis[now.dest] && now.c+curr.c<=distanceThreshold){
-                   
-                    pq.add(new node(now.dest,now.c+curr.c));
-                   }
-               }
-            
+                for(int j=0;j<arr[src].size();j++){
+                    nd destination=arr[src].get(j);
+                    int expecteddest=destination.dest;
+                    int expectedcost=cost+destination.cst;
+                    
+                    if(expectedcost<=distanceThreshold && !vis[expecteddest]){
+                        pq.add(new node(expecteddest,expectedcost));
 
+                    }
+                    
+                }
 
-          }
-ans[i]=cnt;
-min=Math.min(ans[i],min);
+            }
+            if(cnt<=min){
+                min=cnt;
+                city=i;
+            }
+
         }
 
+        return city;
 
 
-
-// System.out.print(min);
-
-    for(int i=n-1;i>=0;i--){ 
-        if(ans[i]==min){ 
-            // System.out.print(ans[i]+" ");
-            return i;
-        }
-    }   
-         return -1;
-
+        
     }
 }
