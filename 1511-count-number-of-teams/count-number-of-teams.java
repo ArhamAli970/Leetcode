@@ -1,39 +1,28 @@
 class Solution {
     public int numTeams(int[] rating) {
         int n=rating.length;
-        int scBefore[]=new int[n];
+        int cnt=0;
+       
 
         for(int i=0;i<n;i++){
-            int c=0;
+            int cBefore=0,cAfter=0;
             for(int j=i-1;j>=0;j--){
-                if(rating[j]<rating[i]){c++;}
+                if(rating[j]<rating[i]){cBefore++;}
             }
-            scBefore[i]=c;
-        }
 
-        int scAfter[]=new int[n];
-
-
-         for(int i=0;i<n;i++){
-            int c=0;
             for(int j=i+1;j<n;j++){
-                if(rating[j]<rating[i]){c++;}
+                if(rating[j]<rating[i]){cAfter++;}
             }
-            scAfter[i]=c;
+
+            int mul1=cBefore*(n-i-1-cAfter);
+            int mul2=cAfter*(i-cBefore);
+            cnt+=(mul1+mul2);
+         
         }
 
-int cnt=0;
-        for(int i=0;i<n;i++){
-            int c1=scBefore[i];
-            int c2=n-i-1-scAfter[i];
-            cnt+=(c1*c2);
-
-            int c3=scAfter[i];
-            int c4=i-scBefore[i];
-            cnt+=(c3*c4);
 
 
-        }
+      
 
 return cnt;
         
