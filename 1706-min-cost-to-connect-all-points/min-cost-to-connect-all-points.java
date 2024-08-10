@@ -1,52 +1,42 @@
 class Solution {
-
-    static class node implements Comparable <node>{ 
-        int idx,d;
-
-        node(int idx,int d){ 
-            this.idx=idx;
-            this.d=d;
+    static class node  implements Comparable <node>{
+        int i,cst;
+        node(int cst,int i){
+            this.cst=cst;
+            this.i=i;
         }
 
-        @Override
-        public int compareTo(node p){ 
-            return this.d-p.d;
+        public int compareTo(node p){
+            return this.cst-p.cst;
         }
     }
-
     public int minCostConnectPoints(int[][] points) {
+        int cost=0;
         int n=points.length;
-        // boolean vis[]= new boolean[n];
-        int dist=0;
-        HashSet<Integer> h= new HashSet<>();
-        for(int i=0;i<n;i++){ 
-            h.add(i);
-        }
+        boolean vis[]=new boolean[n];
 
         PriorityQueue<node> pq= new PriorityQueue<>();
-        int cnt=n;
-
+        int v=n;
         pq.add(new node(0,0));
 
-        while(!pq.isEmpty() && cnt>0){ 
+        while(v>0){
             node curr=pq.remove();
-            if(h.contains(curr.idx)){cnt--;dist+=curr.d;}
-            else if(!h.contains(curr.idx)){continue;}
-            h.remove(curr.idx);
-            for(int i :h){ 
-            
-                    int manHatt=Math.abs(points[curr.idx][0]-points[i][0])+Math.abs(points[curr.idx][1]-points[i][1]);
-                    pq.add(new node(i,manHatt));
-            
+            if(vis[curr.i]){continue;}
+            int idx=curr.i;
+            cost+=curr.cst;
+            int x=points[idx][0],y=points[idx][1];
+            vis[idx]=true;
+            for(int j=0;j<n;j++){
+                if(vis[j]){continue;}
+                int sumx=Math.abs(x-points[j][0]);
+                int sumy=Math.abs(y-points[j][1]);
+                pq.add(new node(sumy+sumx,j));
             }
-
+            --v;
         }
 
-
-return dist;
-
+        return cost;
 
 
-        
     }
 }
