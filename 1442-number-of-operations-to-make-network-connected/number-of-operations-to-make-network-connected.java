@@ -1,40 +1,44 @@
 class Solution {
-    static boolean vis[];
-
-    public static void dfs(int i, ArrayList<Integer> [] arr){
-        vis[i]=true;
-
-        for(int j=0;j<arr[i].size();j++){
-            if(!vis[arr[i].get(j)]){
-                  dfs(arr[i].get(j),arr);
-            }
-        }
-        
-    }
-
+    static int par[];
+public static int getPar(int v){
+    if(par[v]==v){return v;}
+    return  par[v]=getPar(par[v]);
+}
 
     public int makeConnected(int n, int[][] connections) {
-        if(connections.length<n-1){return -1;}
-        int cnt=0;
+        int m=connections.length;
+        if(n-1>connections.length){return -1;}
 
-        ArrayList<Integer> [] arr= new ArrayList[n];
-        for(int i=0;i<n;i++){
-            arr[i]=new ArrayList<>();
-        }
+        par=new int[n];
+        int sz[]=new int[n];
+        for(int i=0;i<n;i++){par[i]=i;}
+        Arrays.fill(sz,1);
+        int cnt=n;
 
-        for(int i=0;i<connections.length;i++){
-            arr[connections[i][0]].add(connections[i][1]);
-            arr[connections[i][1]].add(connections[i][0]);
-        }
+        for(int i=0;i<m;i++){
+            int p1=getPar(connections[i][0]);
+            int p2=getPar(connections[i][1]);
 
-        vis= new boolean[n];
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                cnt++;
-                dfs(i,arr);
+            if(p1==p2){continue;}
+
+            int s1=sz[p1];
+            int s2=sz[p2];
+
+            if(s1>s2){
+                sz[p1]+=s2;
+                par[p2]=p1;
+            }else{
+                sz[p2]+=s1;
+                par[p1]=p2;
             }
+cnt--;
+
         }
+
+
 
         return cnt-1;
+        
+
     }
 }
