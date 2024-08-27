@@ -23,7 +23,7 @@ class Solution {
         PriorityQueue<node> pq= new PriorityQueue<>();
         int n=nums1.length;
 
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n && i<k;i++){
             pq.add(new node(i,0,nums1[i]+nums2[0]));
         }
 
