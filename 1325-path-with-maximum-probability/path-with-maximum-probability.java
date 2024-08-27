@@ -38,7 +38,7 @@ class Solution {
            if(curr.st==end_node){return curr.dist;}
            if(vis[curr.st]){continue;}
            vis[curr.st]=true;
-           System.out.print(curr.st+" ");
+        //    System.out.print(curr.st+" ");
 
            for(int i=0;i<arr[curr.st].size();i++){
               node ed=arr[curr.st].get(i);
