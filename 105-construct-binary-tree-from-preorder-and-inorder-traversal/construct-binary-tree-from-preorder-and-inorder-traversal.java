@@ -14,33 +14,29 @@
  * }
  */
 class Solution {
+    static int n;
     static int idx;
-    public static TreeNode call(int st,int end,int pre[],int in[]){ 
-       
-       if(st>end){return null;}
-       if(st==end){return new TreeNode(pre[idx++]);}
+    public static TreeNode call(int pre[],int in[],int st,int end){
+        if(st>end){return null;}
+        int curr=-1;
+        for(int i=st;i<=end;i++){
+            if(in[i]==pre[idx]){
+                curr=i;break;
+            }
+        }
+        idx++;
+        TreeNode root=new TreeNode(in[curr]);
+        root.left=call(pre,in,st,curr-1);
+        root.right=call(pre,in,curr+1,end);
 
-       TreeNode curr=new TreeNode(pre[idx]);
-       
-       int mid=0;
-
-       for(int i=st;i<=end;i++){ 
-          if(in[i]==pre[idx]){mid=i; break;}
-       }
-
-       idx++;
-
-       curr.left=call(st,mid-1,pre,in);
-       curr.right=call(mid+1,end,pre,in);
-
-       return curr;
-       
+        return root;
 
 
     }
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        idx=0;
-        return call(0,preorder.length-1,preorder,inorder);
 
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        n=preorder.length;
+        idx=0;
+        return call(preorder,inorder,0,n-1);
     }
 }
