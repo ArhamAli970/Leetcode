@@ -1,18 +1,21 @@
 class Solution {
     public int minDifference(int[] nums) {
-        
-        Arrays.sort(nums);
-        int n=nums.length,i=0,j=n-4;
-        int min=Integer.MAX_VALUE;
+        int n=nums.length;
+        if(n<=3){return 0;}
 
-        while(j<n && i<j){
-           min=Math.min(nums[j]-nums[i],min);
-           i++;j++;
+        Arrays.sort(nums);
+        int i=0,j=n-4,min=Integer.MAX_VALUE;
+
+        while(j<n){
+            int diff=nums[j]-nums[i];
+            min=Math.min(diff,min);
+            j++;
+            i++;
         }
 
-        return min==Integer.MAX_VALUE?0:min;
+        return min;
 
-
-
+       
+        
     }
 }
