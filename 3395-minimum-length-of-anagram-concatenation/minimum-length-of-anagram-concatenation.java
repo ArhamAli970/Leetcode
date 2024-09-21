@@ -1,38 +1,44 @@
 class Solution {
-    
-    public static int gcd(int num1,int num2){
-        int m=Math.min(num1,num2);
-        for(int i=m;i>0;i--){
-            if(num1%i==0 && num2%i==0){return i;}
+    static int n;
+
+    public static boolean isOk(int len,String s){
+        int cnt[]=new int[26];
+
+        for(int i=0;i<len;i++){
+            ++cnt[s.charAt(i)-'a'];
         }
-        return -1;
+        
+        for(int i=len;i<n;i+=len){
+            int curr[]=new int[26];
+            for(int j=i;j<i+len;j++){
+                ++curr[s.charAt(j)-'a'];
+            }
+
+              
+
+            for(int j=0;j<26;j++){
+                // System.out.println(curr[j]+" "+cnt[j]);
+                if(curr[j]!=cnt[j]){return false;}
+            }
+
+        }
+
+        return true;
+        
+
+
     }
-    
-    
+
     public int minAnagramLength(String s) {
-        
-        HashMap<Character,Integer> mp= new HashMap<>();
-        // int min=Integer.MAX_VALUE;
-        
-        for(int i=0;i<s.length();i++){
-            mp.put(s.charAt(i),mp.getOrDefault(s.charAt(i),0)+1);
+        n=s.length();
+
+        for(int i=0;i<n;i++){
+            if(n%(i+1)==0 && isOk(i+1,s)){
+                return i+1;
+            }
         }
-        
-        int min=mp.get(s.charAt(0));
-     
-        
-        for(Map.Entry<Character,Integer> e:mp.entrySet()){
-            min=gcd(e.getValue(),min);
-        }
-        
-        int cnt=0;
-        
-        for(Map.Entry<Character,Integer> e:mp.entrySet()){
-            if(e.getValue()%min!=0){return s.length();}
-            cnt+= (e.getValue()/min);
-        }
-        
-        return cnt;
+
+        return n;
         
     }
 }
