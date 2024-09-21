@@ -2,7 +2,7 @@
 
 <p>Return the <strong>minimum</strong> possible length of the string <code>t</code>.</p>
 
-<p>An <strong>anagram</strong> is a word or phrase formed by rearranging the letters of a word or phrase, typically using all the original letters exactly once.</p>
+<p>An <strong>anagram</strong> is formed by rearranging the letters of a string. For example, &quot;aab&quot;, &quot;aba&quot;, and, &quot;baa&quot; are anagrams of &quot;aab&quot;.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
