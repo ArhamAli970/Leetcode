@@ -1,20 +1,21 @@
 class MyCalendar {
-static ArrayList<ArrayList<Integer>> arr;
+static TreeMap<Integer,Integer> mp;
     public MyCalendar() {
-        arr=new ArrayList<>();
+        mp=new TreeMap<>();
+        mp.put(Integer.MAX_VALUE,Integer.MAX_VALUE);
+        mp.put(Integer.MIN_VALUE,Integer.MIN_VALUE);
     }
     
     public boolean book(int st, int end) {
-    
-        for(int i=0;i<arr.size();i++){
-            if(st>=arr.get(i).get(0) && st<arr.get(i).get(1)){return false;}
-            if(end>arr.get(i).get(0) && end<arr.get(i).get(1)){return false;}
-            if(st<=arr.get(i).get(0) && end>=arr.get(i).get(1)){return false;}
-        }
 
-            arr.add(new ArrayList<>());
-            arr.get(arr.size()-1).add(st);
-            arr.get(arr.size()-1).add(end);
+        int key=mp.ceilingKey(st);
+        if(key<end){return false;}
+
+        key=mp.floorKey(st);
+        int val=mp.get(key);
+        if(val>st || val>=end){return false;}
+        
+        mp.put(st,end);
         return true;
     }
 }
