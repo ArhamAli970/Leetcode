@@ -13,7 +13,7 @@ static TreeMap<Integer,Integer> mp;
 
         key=mp.floorKey(st);
         int val=mp.get(key);
-        if(val>st || val>=end){return false;}
+        if(val>st){return false;}
         
         mp.put(st,end);
         return true;
