@@ -8,12 +8,12 @@ class Solution {
         }
 
         public int compareTo(node p){
-            if(p.sum==this.sum){
-                if(p.i1==this.i1){
-                    return this.i2-p.i2;
-                }
-                return this.i1-p.i1;
-            }
+            // if(p.sum==this.sum){
+            //     if(p.i1==this.i1){
+            //         return this.i2-p.i2;
+            //     }
+            //     return this.i1-p.i1;
+            // }
             return Long.compare(this.sum,p.sum);
         }
 
