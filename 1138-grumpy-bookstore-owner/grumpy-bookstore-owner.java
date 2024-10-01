@@ -1,33 +1,31 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-
-        int profit=0,n=customers.length;
+        int sumx=0,sumy=0,tot=0,n=customers.length;
 
         for(int i=0;i<n;i++){
-            if(grumpy[i]==0){
-                profit+=customers[i];
-            }
+            if(grumpy[i]==0){tot+=customers[i];}
         }
-        int j=0,done=0,max=0;
 
-        for(int i=0;i<n;i++){
+        // System.out.print(tot);
+        int i=0,max=tot;
+        for(int j=0;j<n;j++){
+            if(grumpy[j]==1){sumy+=customers[j];}
+            // else{sumy+=customers[j];}
 
-            if(grumpy[i]==1){
-                done+=customers[i];
+            if(j>=minutes){
+            if(grumpy[i]==1){sumy-=customers[i];}
+            // else{sumy-=customers[i];}
+            i++;
             }
 
-            if(i-j==minutes-1){
-                max=Math.max(max,profit+done);
-                if(grumpy[j]==1){
-                    done-=customers[j];
-                }
-                j++;
+            if(j>=minutes-1){
+                int curr=tot+sumy;
+                max=Math.max(max,curr);
             }
-
 
         }
 
         return max;
-        
+
     }
 }
