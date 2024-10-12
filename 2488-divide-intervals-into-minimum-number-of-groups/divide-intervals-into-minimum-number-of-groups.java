@@ -10,11 +10,10 @@ class Solution {
         for(int i[]:intervals){
             if(!pq.isEmpty() && pq.peek()<i[0]){
                 pq.remove();
-                pq.add(i[1]);
             }else{
                 cnt++;
-                pq.add(i[1]);
             }
+            pq.add(i[1]);
         }
 
 return cnt;
