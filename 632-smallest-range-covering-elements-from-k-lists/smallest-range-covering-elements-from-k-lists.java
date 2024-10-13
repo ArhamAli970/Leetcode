@@ -1,72 +1,49 @@
 class Solution {
-
     public int[] smallestRange(List<List<Integer>> nums) {
+        int k=nums.size();
+        // if(k==1){return nums.get(0).get(0);}
 
-
-int cnt=0;
-for(int i=0;i<nums.size();i++){ 
-     cnt+=nums.get(i).size();
-}
-
-int arr[][]= new int[cnt][2];
-
-cnt=0;
-for(int i=0;i<nums.size();i++){ 
-    for(int j=0;j<nums.get(i).size();j++){ 
-        arr[cnt][0]=nums.get(i).get(j);
-        arr[cnt++][1]=i;
-    }
-}
-
-Arrays.sort(arr,(a,b)->{ 
-     if(a[0]!=b[0]){return a[0]-b[0];}
-     return a[1]-b[1];
-
-});
-
-
-int cntRng=nums.size();
-
-
-
-HashMap<Integer,Integer> mp= new HashMap<>();
-int ans[]= new int[2];
-ans[0]=1;ans[1]=1;
-int rng=Integer.MAX_VALUE;
-
-int i=0,j=0,size=arr.length;
-
-while(j<size){
-
-    while(j<size && mp.size()<cntRng){ 
-        mp.put(arr[j][1],mp.getOrDefault(arr[j][1],0)+1);
-        j++;
-    }
-
-    // System.out.print(j+" ");
-    if(mp.size()==cntRng){j--;}
-
-if(j>=size){break;}
-
-    while(i<j && mp.size()>=cntRng){ 
-        if(arr[j][0]-arr[i][0]<rng && arr[j][1]!=arr[i][1]){
-            rng=arr[j][0]-arr[i][0];
-            ans[0]=arr[i][0];ans[1]=arr[j][0];
+        int idx[]=new int[k];
+        TreeMap<Integer,Queue<Integer>> mp=new TreeMap();
+        for(int i=0;i<k;i++){
+            int num=nums.get(i).get(0);
+            if(!mp.containsKey(num)){mp.put(num,new LinkedList<>());}
+            mp.get(num).add(i);
         }
-        int val=mp.get(arr[i][1]);
-        mp.put(arr[i][1],val-1);
-        if(mp.get(arr[i][1])==0){mp.remove(arr[i][1]);}
-        i++;
-    }
 
-j++;
+        int diff=Integer.MAX_VALUE;
+        int ans[]=new int[2];
+        
 
+        while(true){
+            int currdiff=mp.lastKey()-mp.firstKey();
+            if(diff>currdiff){
+                diff=currdiff;
+                ans[0]=mp.firstKey();
+                ans[1]=mp.lastKey();
+            }
 
-}
+            int currK=mp.get(mp.firstKey()).remove();
 
+            if(mp.get(mp.firstKey()).isEmpty()){
+                mp.remove(mp.firstKey());
+            }
 
-return ans;
+            ++idx[currK];
+            if(idx[currK]>=nums.get(currK).size()){break;}
+            int ele=nums.get(currK).get(idx[currK]);
 
+            if(!mp.containsKey(ele)){
+                mp.put(ele,new LinkedList<>());
+            }
+
+            mp.get(ele).add(currK);
+
+            
+
+        }
+
+        return ans;
 
     }
 }
