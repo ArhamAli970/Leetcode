@@ -4,16 +4,9 @@ class Solution {
         int i=0,max=0,j=0;
 
         for(j=0;j<nums.length;j++){
+            k-=nums[j]==0?1:0;
             max=Math.max(j-i,max);
-            if(nums[j]==0){
-                k--;
-                while(k<0){
-                    if(nums[i]==0){
-                        k++;
-                    }
-                    i++;
-                }
-            }
+            while(k<0){k+=nums[i]==0?1:0;i++;}
         }
 
         return Math.max(max,j-i);
