@@ -1,8 +1,7 @@
 class Solution {
     static class node implements Comparable <node>{
-        int idx,lst,diff;
-        node(int idx,int lst,int diff){
-            this.idx=idx;
+        int lst,diff;
+        node(int lst,int diff){
             this.lst=lst;
             this.diff=diff;
         }
@@ -26,7 +25,7 @@ class Solution {
         int j=0,i=0,n=intervals.length;
 
         while(!num.isEmpty()){
-            while(i<n && num.peek()>=intervals[i][0]){pq.add(new node(i,intervals[i][1],intervals[i][1]-intervals[i][0]));i++;}
+            while(i<n && num.peek()>=intervals[i][0]){pq.add(new node(intervals[i][1],intervals[i][1]-intervals[i][0]));i++;}
             while(!pq.isEmpty() && pq.peek().lst<num.peek()){
                 pq.remove();
             }
