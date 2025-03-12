@@ -4,13 +4,11 @@ class Solution {
 
         while(i<n){
             cst+=(gas[j]-cost[j]);
-            // System.out.print(cst+" ");
             j=(j+1)%n;
             cnt++;
             if(cst<0){
                 if(j<=i){break;}
                 i=j;cnt=0;cst=0;
-                // System.out.print(i+" ");
             }else if(cnt==n){
                 return i;
             }
