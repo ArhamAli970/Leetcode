@@ -9,7 +9,7 @@ class Solution {
     public int maximumCandies(int[] candies, long k) {
         int st=1,end=10000001,ans=0;
         while(st<=end){
-            int cand=(st+end)/2;
+            int cand=st+((end-st)/2);
             if(func(candies,k,cand)){
                 ans=cand;
                 st=cand+1;
