@@ -15,32 +15,23 @@
  */
 class Solution {
 
-public static boolean call(TreeNode root,int target){
-    if(root==null){return true;}
-    if(root.left==null && root.right==null){
-        return root.val==target?true:false;
+    public static boolean call(TreeNode root,int target){
+        if(root==null){return false;}
+
+        boolean lft=call(root.left,target);
+        boolean rht=call(root.right,target);
+
+        if(lft){root.left=null;}
+        if(rht){root.right=null;}
+
+        return root.left==null && root.right==null && root.val==target; 
+
     }
-
-    boolean ans1=call(root.left,target)  ;
-    boolean ans2=call(root.right,target);
-
-    if(ans1 && ans2){
-        root.left=null; root.right=null;
-        return root.val==target?true:false;
-    }
-
-    if(ans1){root.left=null;}
-    if(ans2){root.right=null;}
-
-    return false;
-
-}
-
     public TreeNode removeLeafNodes(TreeNode root, int target) {
-        
 
-        return call(root,target) ?null : root;
+        if(call(root,target)){return null;}
 
+        return root;
         
     }
 }
