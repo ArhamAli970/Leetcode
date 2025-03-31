@@ -8,19 +8,19 @@ class Solution {
             long sum=weights[i]+weights[i+1];
             pq1.add(sum);
             pq2.add(sum);
+            if(pq1.size()>k-1){pq1.remove();}
+            if(pq2.size()>k-1){pq2.remove();}
         }
 
         long ans1=0,ans2=0;
-        k--;
-        while(k>0){
+        while(!pq1.isEmpty()){
             long p1=pq1.remove();
             long p2=pq2.remove();
             ans1+=p1;
             ans2+=p2;
-            k--;
         }
 
-        return ans2-ans1;
+        return ans1-ans2;
 
 
         
