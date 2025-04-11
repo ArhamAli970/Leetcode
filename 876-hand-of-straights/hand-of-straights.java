@@ -1,30 +1,28 @@
 class Solution {
-    public boolean isNStraightHand(int[] hand, int gs) {
+    public boolean isNStraightHand(int[] hand, int gp) {
 
-        if(hand.length%gs!=0){return false;}
-
-        
         TreeMap<Integer,Integer> mp=new TreeMap<>();
 
-        for(int i: hand){
-            mp.put(i,mp.getOrDefault(i,0)+1);
+        for(int i=0;i<hand.length;i++){
+            mp.put(hand[i],mp.getOrDefault(hand[i],0)+1);
         }
 
-
-        while(mp.size()>0){
-            int val=mp.firstKey();
-            int sz=gs;
-            while(sz>0){
-                if(!mp.containsKey(val)){return false;}
+        
+        while(mp.size()>=gp){
+            int val=mp.firstKey(),sz=gp;
+            while(mp.containsKey(val) && sz>0){
+                sz--;
                 mp.put(val,mp.get(val)-1);
                 if(mp.get(val)==0){mp.remove(val);}
-                --sz;
-                ++val;
+                val++;
+            }
+
+            if(sz>0){
+                return false;
             }
         }
 
-        return true;
-
+        return mp.size()==0;
 
     }
 }
