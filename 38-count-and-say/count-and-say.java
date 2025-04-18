@@ -1,10 +1,8 @@
 class Solution {
 
     public static StringBuilder call(int n){
-        if(n==1){
-        StringBuilder s=new StringBuilder();
-        s.append("1");return s;
-        }
+        if(n==1){return new StringBuilder("1");}
+        
         StringBuilder sb=call(n-1);
         StringBuilder ans=new StringBuilder();
         int cnt=0;
