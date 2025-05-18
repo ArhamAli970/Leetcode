@@ -14,19 +14,29 @@ class Solution {
         int n=heights.length,m=heights[0].length;
        PriorityQueue<node> pq= new PriorityQueue<>();
        pq.add(new node(0,0,0));
+       
 
+       int dir[][]={{-1,0},{0,1},{1,0},{0,-1}};
+       boolean vis[][]=new boolean[n][m];
+       vis[0][0]=true;
        while(!pq.isEmpty()){ 
            node curr=pq.remove();
            int x=curr.i,y=curr.j;
-           if(heights[x][y]==0){continue;}
+        //    if(vis[x][y]){continue;}
            if(x==n-1 && y==m-1){return curr.h;}
            int val=heights[x][y];
-           heights[x][y]=0;
+            vis[x][y]=true;
+        //    heights[x][y]=0;
            
-           if(x-1>=0 && heights[x-1][y]!=0){pq.add(new node(x-1,y,Math.max(curr.h,Math.abs(val-heights[x-1][y]))));}
-           if(y-1>=0 && heights[x][y-1]!=0){pq.add(new node(x,y-1,Math.max(curr.h,Math.abs(val-heights[x][y-1]))));}
-           if(x+1<n && heights[x+1][y]!=0){pq.add(new node(x+1,y,Math.max(curr.h,Math.abs(val-heights[x+1][y]))));}
-           if(y+1<m && heights[x][y+1]!=0){pq.add(new node(x,y+1,Math.max(curr.h,Math.abs(val-heights[x][y+1]))));}
+            for(int i[]:dir){
+                if(x+i[0]<0 || x+i[0]>=n || y+i[1]<0 || y+i[1]>=m || vis[x+i[0]][y+i[1]]){
+                    continue;
+                }
+                int ht=Math.max(curr.h,Math.abs(val-heights[x+i[0]][y+i[1]]));
+                pq.add(new node(x+i[0],y+i[1],ht));
+               
+
+            }
 
 
        }
