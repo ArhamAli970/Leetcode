@@ -23,25 +23,24 @@ class Solution {
 
         return;
     }
+    public static void make(ArrayList<Integer> arr[],int ed[][],int sz){
+    
+        for(int i=0;i<=sz;i++){arr[i]=new ArrayList<>();}
+       
+        for(int i[]:ed){
+            arr[i[0]].add(i[1]);
+            arr[i[1]].add(i[0]);
+        }
+    }
     public int[] maxTargetNodes(int[][] edges1, int[][] edges2) {
-         int n=edges1.length,m=edges2.length;
-        ArrayList<Integer> arr1[]=new ArrayList[n+1];
-        ArrayList<Integer> arr2[]=new ArrayList[m+1];
+        int n=edges1.length,m=edges2.length;
+         ArrayList<Integer> arr1[]=new ArrayList[n+1];
+         ArrayList<Integer> arr2[]=new ArrayList[m+1];
 
-        for(int i=0;i<=n;i++){arr1[i]=new ArrayList<>();}
-        for(int i=0;i<=m;i++){arr2[i]=new ArrayList<>();}
+         make(arr1,edges1,n);
+         make(arr2,edges2,m);
 
-        for(int i[]:edges1){
-            arr1[i[0]].add(i[1]);
-            arr1[i[1]].add(i[0]);
-        }
-        for(int i[]:edges2){
-            arr2[i[0]].add(i[1]);
-            arr2[i[1]].add(i[0]);
-        }
-
-
-
+    
         HashSet<Integer> h=new HashSet<>();
         call(h,arr2);
         int mx=Math.max(h.size(),m+1-(h.size()));
