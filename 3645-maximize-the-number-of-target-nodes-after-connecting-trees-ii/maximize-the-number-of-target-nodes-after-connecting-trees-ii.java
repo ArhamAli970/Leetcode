@@ -50,11 +50,7 @@ class Solution {
 
         int ans[]=new int[n+1];
         for(int i=0;i<=n;i++){
-            if(h.contains(i)){
-                ans[i]=h.size()+mx;
-            }else{
-                ans[i]=n+1-h.size()+mx;
-            }
+            ans[i]=h.contains(i)?h.size()+mx:n+1-h.size()+mx;
         }
 
         return ans;
