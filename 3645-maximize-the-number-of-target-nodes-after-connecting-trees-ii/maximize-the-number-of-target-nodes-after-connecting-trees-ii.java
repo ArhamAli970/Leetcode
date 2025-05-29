@@ -40,12 +40,11 @@ class Solution {
             arr2[i[1]].add(i[0]);
         }
 
-        // int max=0;
+
 
         HashSet<Integer> h=new HashSet<>();
         call(h,arr2);
         int mx=Math.max(h.size(),m+1-(h.size()));
-        System.out.print(h);
         h=new HashSet<>();
         call(h,arr1);
 
