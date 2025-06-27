@@ -1,43 +1,37 @@
+// import java.util.*;
 class RandomizedSet {
-
     static HashMap<Integer,Integer> mp;
-    static ArrayList<Integer> al;
-
+    static ArrayList<Integer> arr;
+    
     public RandomizedSet() {
-        
-        mp= new HashMap<>();
-        al= new ArrayList<>();
-        
+        arr=new ArrayList<>();
+        mp=new HashMap<>();
+    
     }
     
     public boolean insert(int val) {
-        if(mp.containsKey(val)){
-            return false;
-        }
-        al.add(val);
-        mp.put(val,al.size()-1);
+        if(mp.containsKey(val)){return false;}
+        arr.add(val);
+        mp.put(val,arr.size()-1);
         return true;
     }
     
     public boolean remove(int val) {
         if(!mp.containsKey(val)){return false;}
         int idx=mp.get(val);
-        int lst=al.get(al.size()-1);
-
-        al.set(idx,lst);
-        mp.put(lst,idx);
-
-        al.remove(al.size()-1);
-        mp.remove(val); 
-    
-return true;
-
+        int x=arr.get(arr.size()-1);
+        mp.put(arr.get(arr.size()-1),idx);
+        arr.set(idx,x);
+        arr.remove(arr.size()-1);
+        mp.remove(val);
+        return true;
     }
     
     public int getRandom() {
-        int size=al.size();
-     int idx=(int)Math.floor(Math.random()*size);
-     return al.get(idx);   
+        int sz=arr.size();
+        int rn=(int)Math.floor(Math.random()*sz);
+        return arr.get(rn);
+
     }
 }
 
