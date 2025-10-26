@@ -27,13 +27,10 @@ class Solution {
                 return true;
             }
             else if(matrix[i][j]>target){
-                // System.out.println("1");
                 j=call1(i,j,matrix,target);
             }else{
-                // System.out.println("2");
                 i=call2(i,j,matrix,target);
             }
-            // System.out.println(i+" "+j);
         }
 
         return false;
