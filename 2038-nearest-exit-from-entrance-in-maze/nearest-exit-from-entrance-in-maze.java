@@ -1,58 +1,55 @@
 class Solution {
-    static class node{
-        int x,y;
-        node(int x,int y){
-            this.x=x;
-            this.y=y;
+    static class  node{
+        int i,j;
+        node(int i,int j){
+            this.i=i;
+            this.j=j;
         }
     }
+    static int n,m;
+    
+    public static boolean check(int i,int j,int ent[]){
+        
+        if(i==ent[0] && j==ent[1]){return false;}
+        
+        return i==n-1 || i==0 || j==m-1 || j==0;
+        
+    }
+    
     public int nearestExit(char[][] maze, int[] entrance) {
-                int n=maze.length,m=maze[0].length;
-        Queue<node> q= new LinkedList<>();
-        int arr[][]={{0,1},{1,0},{0,-1},{-1,0}};
-
-        boolean chk[][]=new boolean[n][m]; 
-
-
-        q.add(new node(entrance[0],entrance[1]));
-        chk[entrance[0]][entrance[1]]=true;
-        int cnt=0;
-
-        while(!q.isEmpty()){
-
-            int size=q.size();
-
-            for(int k=0;k<size;k++){
-                node curr=q.remove();
-                int x=curr.x,y=curr.y;
-                
-                if(x==0 || y==0 || x==n-1 || y==m-1){
-                    if(x!=entrance[0] || y!=entrance[1]){
-                    return cnt;
-                    }
-                }
-
-                for(int i=0;i<4;i++){
-                    if(x+arr[i][0]<0 || x+arr[i][0]>=n || y+arr[i][1]<0 || y+arr[i][1]>=m ){continue;}
-                    if( maze[x+arr[i][0]][y+arr[i][1]]!='+'  && !chk[x+arr[i][0]][y+arr[i][1]]){
-                        chk[x+arr[i][0]][y+arr[i][1]]=true;
-                        q.add(new node(x+arr[i][0],y+arr[i][1]));
-                    }
-                }
-
-
-
-
-            }
-
-
-cnt++;
-        }
-
-
+        
+           Queue<node> q=new LinkedList<>();
+           q.add(new node(entrance[0],entrance[1]));
+        
+         n=maze.length;m=maze[0].length;
+        
+          int cnt=0;
+         int arr[][]={{1,0},{-1,0},{0,1},{0,-1}}; 
+        
+           while(!q.isEmpty()){
+               int sz=q.size();
+               for(int l=0;l<sz;l++){
+                   
+                   node curr=q.remove();
+                   int i=curr.i,j=curr.j;
+                   
+                   if(check(i,j,entrance)){return cnt;}
+                   
+                   for(int k=0;k<4;k++){
+                       int x1=arr[k][0],y1=arr[k][1];
+                       if(i+x1>=n || i+x1<0 || j+y1<0 || j+y1>=m || maze[i+x1][j+y1]=='+'){continue;}
+                       
+                       q.add(new node(i+x1,j+y1));
+                       maze[i+x1][j+y1]='+';
+                       
+                   }
+                   
+               }
+               
+               cnt++;
+           }
+        
         return -1;
-
-
-
+        
     }
 }
