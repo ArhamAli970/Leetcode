@@ -18,7 +18,7 @@ class Solution {
              mp.put(words[j],cp>=words[j].length()?true:false);
         }
 
-        System.out.print(mp);
+        // System.out.print(mp);
         
 
         return cnt;
