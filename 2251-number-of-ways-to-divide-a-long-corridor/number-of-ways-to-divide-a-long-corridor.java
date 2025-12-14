@@ -1,31 +1,24 @@
 class Solution {
     public int numberOfWays(String corridor) {
-        long ans=1;
-        int mod=1000000007;
-        int cntSeats=0;
+        long ans=1l;
+        int md=1000000007;
+        int chair=0,chk=-1,inner=0;
         int corLen=corridor.length();
         for(int i=0;i<corLen;i++){ 
-            if(corridor.charAt(i)=='S') cntSeats++;
+            char c=corridor.charAt(i);
+            if(c=='S'){
+                chair++;
+                if(chair>2){
+                    chair=1;ans*=(long)(1+inner);inner=0;ans%=md;
+                }
+            
+            }else{
+                if(chair==2){inner++;}
+            }
         }
-
-        if(cntSeats==0 || cntSeats%2!=0){return 0;}
-        
-        int cnteven=0;
-
-        for(int i=0;i<corLen;i++){ 
-           while(i<corLen && corridor.charAt(i)!='S'){i++;}
-           ++cnteven;
-           if(cnteven%2==0 && cnteven!=cntSeats){
-               i++;
-               int ways=1;
-               while(i<corLen && corridor.charAt(i)!='S'){ways++;i++;}
-               i--;
-               ans=(ans*ways)%mod;
-           }
-           else if(cnteven==cntSeats){break;}
-
-        }
-return (int)ans%mod;
+        if(chair!=2){return 0;}
+        // if(inner>0){ans*=(long)inner;}
+        return (int)(ans%md);
 
     }
 }
