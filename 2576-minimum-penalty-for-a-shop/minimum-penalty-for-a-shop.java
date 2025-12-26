@@ -1,29 +1,25 @@
 class Solution {
     public int bestClosingTime(String customers) {
-
-        int cnt=0,n=customers.length();
-
-        for(int i=0;i<n;i++){ 
-            if(customers.charAt(i)=='Y'){cnt++;}
+        int n=customers.length(),cnty=0,cntn=0;
+        for(int i=0;i<n;i++){
+            cnty+=customers.charAt(i)=='Y'?1:0;
         }
 
-        int min=cnt,ans=0;
+        // if(n==cnty){return n;}
 
-        for(int i=0;i<n;i++){ 
-             if(customers.charAt(i)=='Y'){--cnt;}
-            if(customers.charAt(i)=='N'){++cnt;}
-          
-            if(cnt<min){
-                cnt=min;
-                ans=i+1;
+
+        int min=customers.length(),idx=0;
+        for(int i=0;i<=n;i++){
+            if(cnty+cntn<min){
+                idx=i;
+                min=cnty+cntn;  
             }
-           
-            
-
+            if(i>=n){break;}
+            char c=customers.charAt(i);
+            cnty-=c=='Y'?1:0;
+            cntn+=c=='N'?1:0;
         }
 
-
-        return ans;
-        
+        return idx;
     }
 }
